@@ -7,6 +7,9 @@ import io
 from ultralytics import YOLO
 import base64
 
+from flask import send_from_directory
+import os
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
@@ -111,6 +114,18 @@ def process_image():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/')
+def serve_index():
+    return send_from_directory('.', 'index.html')
+
+@app.route('/solution')
+def serve_solution():
+    return send_from_directory('.', 'solution.html')
+
+@app.route('/<path:filename>')
+def serve_static_files(filename):
+    return send_from_directory('.', filename)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000) 
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 7860)))
