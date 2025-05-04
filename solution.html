@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="bearing defect detection, industrial maintenance, predictive maintenance" />
+  <meta name="description" content="Advanced bearing defect detection solutions for industrial applications" />
+  <meta name="author" content="" />
+
+  <title>Try Solution - SurfaceVisionAI</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+  <style>
+    .result-container {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f8f9fa;
+    }
+    .defect-legend {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+    .defect-item {
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .image-box {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+    }
+    .image-box img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .image-box h4 {
+      margin-top: 10px;
+      color: #333;
+    }
+    .footer-curve {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: transparent;
+      margin-bottom: -40px;
+      z-index: 1;
+    }
+    .footer_blob {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%) translateY(40%);
+      width: 600px;
+      height: 250px;
+      background: #fcd535;
+      border-radius: 60% 60% 80% 80% / 80% 80% 100% 100%;
+      z-index: 1;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      pointer-events: none;
+    }
+    .social_box_wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 220px;
+      height: 80px;
+      margin: 0 auto;
+    }
+    .social_box {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container d-block">
+          <div class="main_nav_menu">
+            <div class="fk_width">
+              <div class="custom_menu-btn">
+                <button onclick="openNav()">
+                  <span class="s-1"> </span>
+                  <span class="s-2"> </span>
+                  <span class="s-3"> </span>
+                </button>
+              </div>
+              <div id="myNav" class="overlay">
+                <div class="overlay-content">
+                  <a class="" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="" href="about.html">About </a>
+                  <a class="" href="gallery.html">Solutions </a>
+                  <a class="" href="blog.html">Case Studies </a>
+                  <a class="" href="testimonial.html">Testimonials </a>
+                </div>
+              </div>
+            </div>
+            <a class="navbar-brand" href="index.html">
+              <span>
+                SurfaceVisionAI
+              </span>
+            </a>
+            <div class="user_option">
+              <a href="#">
+                Contact Us
+              </a>
+              <a href="solution.html" class="btn btn-warning ml-2" style="margin-left: 10px; color: #fff; background: #ffc107; border-radius: 20px; padding: 5px 18px; font-weight: bold;">Try!</a>
+              <form class="form-inline ">
+                <button class="btn  nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- solution upload section -->
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <div id="headingContainer" class="heading_container">
+            <h2>Try Our Solution</h2>
+            <p>Upload a bearing image to see our defect detection in action.</p>
+          </div>
+          <div class="upload-container" style="margin: 30px 0;">
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="previewImage(event)" />
+            <label for="imageUpload" class="upload-btn btn btn-primary" style="padding: 10px 30px; border-radius: 25px; cursor: pointer;">Upload Image</label>
+          </div>
+          <div id="resultContainer" class="result-container" style="display: none;">
+            <div class="defect-legend" id="defectLegend"></div>
+            <div class="image-container">
+              <div class="image-box">
+                <h4>Original Image</h4>
+                <img id="preview" src="" alt="Uploaded Image" />
+              </div>
+              <div class="image-box">
+                <h4>Defect Analysis</h4>
+                <img id="resultImage" src="" alt="Analysis Result" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end solution upload section -->
+
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="info_container layout_padding-top">
+      <div class="container">
+        <div class="heading_container">
+          <h2>
+            Contact Us
+          </h2>
+        </div>
+        <div class="info_main">
+          <div class="row">
+            <div class="col-md-4 col-lg-3">
+              <div class="info_contact ">
+                <a href="#" class="link-box">
+                  <div class="img-box">
+                    <img src="images/location.png" alt="" />
+                  </div>
+                  <div class="detail-box">
+                    <h6>
+                      Chennai
+                    </h6>
+                  </div>
+                </a>
+                <a href="#" class="link-box">
+                  <div class="img-box">
+                    <img src="images/mail.png" alt="" />
+                  </div>
+                  <div class="detail-box">
+                    <h6>
+                      demo@gmail.com
+                    </h6>
+                  </div>
+                </a>
+                <a href="#" class="link-box">
+                  <div class="img-box">
+                    <img src="images/call.png" alt="" />
+                  </div>
+                  <div class="detail-box">
+                    <h6>
+                      Call +01 1234567890
+                    </h6>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-2 col-lg-3">
+              <!-- Removed info_link-box and links as requested -->
+            </div>
+            <div class="col-md-6 ">
+              <div class="footer_blob"></div>
+              <div class="social_box">
+                <a href="#">
+                  <img src="images/facebook.png" alt="" />
+                </a>
+                <a href="#">
+                  <img src="images/twitter.png" alt="" />
+                </a>
+                <a href="#">
+                  <img src="images/linkedin.png" alt="" />
+                </a>
+                <a href="#">
+                  <img src="images/instagram.png" alt="" />
+                </a>
+                <a href="#">
+                  <img src="images/youtube.png" alt="" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <footer class="footer_section ">
+    <div class="container">
+      <p>
+        &copy; 2025 All Rights Reserved
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="js/custom.js"></script>
+  <script>
+    function previewImage(event) {
+      const preview = document.getElementById('preview');
+      const resultImage = document.getElementById('resultImage');
+      const resultContainer = document.getElementById('resultContainer');
+      const headingContainer = document.getElementById('headingContainer');
+      const defectLegend = document.getElementById('defectLegend');
+      const file = event.target.files[0];
+      
+      if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          // Show the container but don't set the image yet
+          resultContainer.style.display = 'block';
+          headingContainer.style.display = 'none';
+
+          // Create FormData object
+          const formData = new FormData();
+          formData.append('image', file);
+
+          // Show loading state
+          preview.src = 'images/loading.gif';
+          resultImage.src = 'images/loading.gif';
+          defectLegend.innerHTML = '<div class="defect-item">Processing image...</div>';
+
+          // Send image to backend
+          fetch('http://localhost:5000/process_image', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              throw new Error(data.error);
+            }
+
+            // Update both images
+            preview.src = 'data:image/png;base64,' + data.original_image;
+            resultImage.src = 'data:image/png;base64,' + data.processed_image;
+
+            // Update defect counts
+            const defects = [
+              { name: 'SHALLOW_GROOVE', count: data.defect_counts.SHALLOW_GROOVE, color: '#0000FF' },
+              { name: 'PIT', count: data.defect_counts.PIT, color: '#00FF00' },
+              { name: 'DEEP_GROOVE', count: data.defect_counts.DEEP_GROOVE, color: '#FF0000' }
+            ];
+            
+            defectLegend.innerHTML = defects.map(defect => 
+              `<div class="defect-item" style="background-color: ${defect.color}">
+                ${defect.name} (Count: ${defect.count})
+              </div>`
+            ).join('');
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            defectLegend.innerHTML = `<div class="defect-item" style="background-color: #FF0000">
+              Error processing image: ${error.message}
+            </div>`;
+          });
+        }
+        
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+
+</html> 
